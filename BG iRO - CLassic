@@ -1,0 +1,177 @@
+#
+# Criada por Luis - http://openkorebrasil.org/index.php?/user/1587-luissilva/
+# Macro BG Tierra - iRO Classic - Versão 0.3
+# 	Criada 0.1 31/07/2015
+# 	Fix bug NPC's Saida 0.2 01/08/2015
+#	Fix bug Automacros, usar "Prontera Warp Pass" ao não se encontar em Prontera 0.3 04/08/2015
+##############
+#	Salve em "Prontera" para não dá merda!
+##############
+#########################################################
+#	 Tenho "Prontera Warp Pass", não estou em prt		#
+#########################################################
+automacro RetardadoNaoSalvouEmPrt {
+	location not prontera
+	location not bat_room
+	location not bat_room2
+	location not bat_a01
+	run-once 1
+		call {
+			do is Prontera Warp Pass
+		}
+}
+
+#####################################################
+###                 Configs                      ####
+#####################################################
+automacro arrumarconfig {
+	location prontera
+	exclusive 1
+	run-once 1
+	call {
+		[
+		#Pra nao cagar a porra toda
+		do conf lockMap none
+		do conf route_randomWalk 0
+		do conf autoTalkCont 0
+		do conf autoMoveOnDeath 0
+		do conf saveMap none
+		do conf sellAuto 0
+		do conf storageAuto 0
+		#Pra nao sentar
+		do conf sitAuto_hp_lower 20
+		do conf sitAuto_hp_upper 90
+		do conf sitAuto_sp_lower 0
+		do conf sitAuto_sp_upper 25
+		do conf sitAuto_follow 0
+		do conf sitAuto_over_50 0
+		do conf sitAuto_idle 0
+		do conf sitAuto_look 4 2
+		do conf sitAuto_look_from_wall 1
+		#Não ATK
+		do conf attackAuto 0
+		]
+	}
+}
+######################################
+##     Entrando na sala da BG       ##
+######################################
+automacro entrandobg {
+	location prontera
+	run-once 1
+	exclusive 1
+	call {
+		[
+		log =========================================
+		log === Falando com a nega para entrar BG ===
+		log =========================================
+		]
+		do talknpc 123 83 c w1 c w1 r0 w1 n
+		pause 0.5
+	}
+}
+#######################################
+##   Estou na bg, indo para o NPC   ###
+#######################################
+automacro bg {
+	location bat_room 154 150
+	run-once 1
+	exclusive 1
+	call {
+		[
+		log ====================
+		log === To na BG KRL! ==
+		log ====================
+		]
+		#Indo ao NPC
+		do move @rand(156, 159)  @rand(165, 175)
+		pause 0.5
+	}
+}
+#########################################
+##       Spam, falando com NPC         ##
+#########################################
+
+automacro bat_roomep1 {
+	location bat_room @rand(156, 159) @rand(165, 175)
+	exclusive 1
+	call {
+		do talknpc 156 178 c w1 r0 w1 n
+	}
+}
+########################################
+##          Entrando no chat          ##
+########################################
+automacro bat_room2 {
+	location bat_room2 57 223
+	run-once 1
+	call {
+		do chat join 0
+	}
+}
+########################################
+##            BG iniciada             ##    
+########################################
+automacro tierra {
+	location bat_a01 352 342
+	exclusive 1
+	run-once 1
+		call {
+		pause 10
+		do move 273 184
+	}
+}
+
+automacro tierra1 {
+	location bat_a01 273 184
+	exclusive 1
+	run-once 1
+		call {
+		do move 166 51
+		a 1909
+	}
+}
+#################################
+#          Sair da bg     	 	#
+#################################
+#Testando Saida da BG - 31/07/15#
+#################################
+automacro NPC1 {
+	#testando
+	location bat_a01 50 374
+	exclusive 1
+	run-once 0
+	call Talk
+}
+       
+automacro NPC2 {
+	#testando
+	location bat_a01 43 17
+	exclusive 1
+	run-once 0
+	call Talk
+}
+
+automacro NPC3 {
+	#testando
+	location bat_a02 50 374
+	exclusive 1
+	run-once 0
+	call Talk
+}
+
+automacro NPC4 {
+	#testando
+	location bat_a02 43 17
+	exclusive 1
+	run-once 0
+	call Talk
+}
+####################
+### Fala NPC fim ###
+####################
+#Testando
+macro Talk {
+	do talk 2
+	do reload macros
+}
