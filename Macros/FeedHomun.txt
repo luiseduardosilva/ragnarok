@@ -1,0 +1,25 @@
+# Macro Pegando comida do carrinho & Desconectar ao não ter comida
+# by: LuisSilva - http://openkorebrasil.org/index.php?/user/1587-luissilva/
+
+automacro SemComida {
+run-once 1
+inventory "Zargon" <= 5
+call {
+	[
+	log =============================
+	log ======== Sem Comida =========
+	log =============================
+	]
+	do quit
+	}
+}
+
+automacro PegaNoCart {
+exclusive 1
+inventory "Zargon" <= 10
+	call {
+		if (@cartamount (Zargon) >= 1) goto pega
+		:pega
+			do cart get Zargon 50
+	}
+}
