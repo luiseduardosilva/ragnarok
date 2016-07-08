@@ -1,0 +1,51 @@
+#
+# Macro Pegando Itens no Mail - Mercador
+# by: Luis - http://openkorebrasil.org/index.php?/user/1587-luissilva/
+
+automacro pegandoitensmail {
+	location prontera#map
+	exclusive 1
+	timeout 1800#tempo de verificar
+	call {
+		#Lista o Mail
+		do mi
+		do ma get 0
+		pause @rand(1, 2)
+		do ma get 1
+		pause @rand(1, 2)
+		do ma get 2
+		pause @rand(1, 2)
+		do ma get 3
+		pause @rand(1, 2)
+		do ma get 4
+		pause @rand(1, 2)
+		do ma get 5
+		pause @rand(1, 2)
+		#Clear msg's
+		do md 1
+		pause @rand(1, 2)
+		do md 2
+		pause @rand(1, 2)
+		do md 3
+		pause @rand(1, 2)
+		do md 4
+		pause @rand(1, 2)
+		do md 5
+	}
+}
+
+################
+
+#
+# Macro Abrir @mail - mjolnir_02
+# By Luis - http://openkorebrasil.org/index.php?/user/1587-luissilva/
+
+automacro tenhocartaCreamy {
+	inventory "Creamy Card" >= 1
+	exclusive 1
+	call {
+		do ma add item 1 Creamy Card# Quantidade e Item
+		pause @rand(1, 2)
+		do ms 'NOME DE QUEM VAI RECEBER' oi oi# titulo(oi) e assunto(oi)
+	}
+}
