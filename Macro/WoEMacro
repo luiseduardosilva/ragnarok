@@ -1,0 +1,46 @@
+
+###Buffar quando pedir, chat publico ou pm.
+
+automacro buffs {
+pubm /buff/i# Caso seja pm -> pm /buff/i
+timeout 1
+exclusive 1
+	call {
+	$p = $.lastpub# Caso seja por pm -> $.lastpm
+	do sp 34 "$p"# Bless
+	do sp 29 "$p"#  Agi
+	do sp 361 "$p"# Assumptio
+  }
+}
+
+## Abrir Warp quando pedir, chat publico ou pm.
+
+automacro portalpayon {
+pm /pay/i# Use pubm para pedir warp em chat publico
+exclusive 1
+	call  {
+		do sl 27 @rand(362, 367)  @rand(64, 65) 4# local onde ele vai abrir warp x e y.
+		pause 1# tempo da Oda e bard usar a skill.
+	        do warp pay_gld# warp que vai ser aberto.
+	}
+}
+
+## Bardo Skill Power Cord.
+
+automacro portal {
+console /warp/i# iRO, quando aparecer no console que o bot do portal usou skill warp a macro triga.
+exclusive 1
+	call  {
+		do ss 312 1
+  }
+}
+
+## Odalisca.
+
+automacro portal {
+console /warp/i# iRO, quando aparecer no console que o bot do portal usou skill warp a macro triga.
+exclusive 1
+	call  {
+		do ss 312 1
+	}
+}
