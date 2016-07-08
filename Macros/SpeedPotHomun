@@ -1,0 +1,13 @@
+# Usar Speed Pot no Homun
+# by: LuisSilva - http://openkorebrasil.org/index.php?/user/1587-luissilva/
+automacro SpeedHomun {
+run-once 1
+location orcsdun01
+inventory "Speed Potion" >= 1
+	call {
+		do ss 244
+		pause @rand(1, 2)
+		do is Speed Potion
+		do ss 243
+	}
+}
