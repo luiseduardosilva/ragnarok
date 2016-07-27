@@ -1,0 +1,16 @@
+all 0 0 1
+
+Novice Fly Wing 0 0 0
+Novice Butterfly Wing 0 0 0
+Novice Potion 0 0 0
+
+Berserk Potion 0 0 0
+Awakening Potion 0 0 0
+Concentration Potion 0 0 0
+Fly Wing 0 0 0
+Butterfly Wing 0 0 0
+Red Potion 0 0 0
+Orange Potion 0 0 0
+Yellow Potion 0 0 0
+White Potion 0 0 0
+Gladius [3] 0 0 0
