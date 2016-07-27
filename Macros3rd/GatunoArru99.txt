@@ -1,0 +1,1424 @@
+#############################################################################################
+# A Codificação do texto está correta?
+# Codificação:  ANSI -> UTF8 Without boom
+# Se você não está vendo a acentuação corretamente, seu arquivo está no formato incorreto.
+# Créditos tradução: Duds, Draigonz, Sayd, Temaki' e Kepler  ---          www.openkore.com.br
+#############################################################################################
+
+automacro nomapa {
+location iz_int
+base == 1
+run-once 1
+call setup
+}
+
+macro setup {
+do conf autoTalkCont 1
+do conf route_randomWalk 0
+do conf attackAuto 0
+do conf lockMap 0
+do conf skillsAddAuto 1
+do conf relogAfterStorage 0
+call chatisse
+}
+
+macro chatisse {
+do talknpc 100 91 c c c c c c c n
+pause 5
+do move 96 73
+pause 5
+do talknpc 198 213 c c c r0 c c c c c c c c c c n
+pause 5
+do move 125 202
+pause 5
+do talknpc 120 207 c r0 c c c c c c c c n
+pause 5
+do move 50 97
+pause 5
+do talknpc 45 94 c c r0 c r0 c c n
+pause 5
+do move 172 72
+pause 5
+do talknpc 179 75 c c r0 c c c n
+pause 5
+do move 203 166
+pause 5
+do talknpc 207 167 c c c r0 c r0 c c n
+pause 5
+do move 128 205
+pause 5
+do talknpc 120 207 c c r0 c c r0 c c c c c c c n
+pause 5
+do talknpc 122 207 c c c c c c c c c c n
+pause 5
+do is Apple Juice
+pause 5
+do talknpc 122 207 c c c r1 c c c c n
+pause 5
+do move 125 257
+pause 5
+do talknpc 100 39 c c r0 c c c n
+pause 5
+do eq Tattered Novice Ninja Suit
+pause 5
+do eq Somber Novice Hood
+pause 5
+do eq Novice Slippers
+pause 5
+do eq Novice Guard
+pause 5
+do eq Criatura Academy Hat [1]
+pause 5
+do eq Novice Main-Gauche
+pause 5
+do move 66 74
+pause 5
+do talknpc 59 83 c r1 n
+pause 5
+do conf attackAuto 2
+pause 5
+do conf route_randomWalk 1
+pause 5
+}
+
+automacro jobidez {
+class Novice
+job == 10
+run-once 1
+call virargatuno
+}
+
+macro virargatuno {
+do conf attackAuto 0
+do conf route_randomWalk 0
+do skills add 1
+do skills add 1
+do skills add 1
+do skills add 1
+do skills add 1
+do skills add 1
+do skills add 1
+do skills add 1
+do skills add 1
+do move 348 215
+pause 5
+do talknpc 343 216 c r0 n
+pause 5
+do move 78 25
+pause 5
+do move 52 136
+pause 5
+do talknpc 52 136 c c r0 c c c r0 c c c c c c c c c c c c c n
+pause 5
+do talknpc 49 134  c c c c c c c c c c c r1 c r1 c c c c n
+pause 5
+do talknpc 55 134 c r0 c c c c r4 c r3 c c r0 c c r4 c r0 c c r1 c c c c r2 c c c c c r4 c c m
+pause 5
+do talknpc 52 136 c c c c n
+pause 5
+do eq Thief Manual
+pause 5
+do talknpc 49 134 c c c c c n
+pause 5
+do talknpc 55 134 c c c c c r0 c c n
+pause 5
+do relog 30
+pause 5
+call viragat
+}
+
+
+macro viragat {
+
+$thief = @rand(1, 3)
+pause 1
+if ($thief = 1) goto loopdogat1
+if ($thief = 2) goto loopdogat2 
+if ($thief = 3) goto loopdogat3
+
+:loopdogat1
+while (class != Thief) as loop
+do relog 5
+pause 5
+do move @rand(59, 62) 145
+pause 5
+do sm 52 @rand(0, 3)
+pause 2
+do sm 52 @rand(0, 3)
+pause 2
+do sm 52 @rand(0, 3)
+do talk @npc(49 134)
+pause 5
+do talk resp 0
+pause 5
+do sm 50 0
+pause 1
+do sm 50 0
+pause 1
+do sm 50 0
+pause 1
+do sm 50 0
+pause 1
+do sm 50 0
+pause 1
+do sm 50 1
+pause 1
+do sm 50 1
+pause 1
+do sm 50 1
+pause 1
+do sm 50 1
+pause 1
+do sm 50 1
+pause 1
+do sm 50 2
+pause 1
+do sm 50 2
+pause 1
+do sm 50 2
+pause 1
+do sm 50 2
+pause 1
+do sm 50 2
+pause 1
+do sm 50 3
+pause 1
+do sm 50 3
+pause 1
+do sm 50 3
+pause 1
+do sm 50 3
+pause 1
+do sm 50 3
+pause 1
+do talk @npc(49 134)
+pause 5
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(55 134)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(52 136)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(52 136)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 5
+end loop
+goto end
+
+:loopdogat2
+while (class != Thief) as loop
+do relog 5
+pause 5
+do move @rand(59, 62) 135
+pause 5
+do sm 52 @rand(4, 7)
+pause 2
+do sm 52 @rand(4, 7)
+pause 2
+do sm 52 @rand(4, 7)
+do talk @npc(49 134)
+pause 5
+do talk resp 0
+pause 5
+do sm 50 4
+pause 1
+do sm 50 4
+pause 1
+do sm 50 4
+pause 1
+do sm 50 4
+pause 1
+do sm 50 4
+pause 1
+do sm 50 5
+pause 1
+do sm 50 5
+pause 1
+do sm 50 5
+pause 1
+do sm 50 5
+pause 1
+do sm 50 5
+pause 1
+do sm 50 6
+pause 1
+do sm 50 6
+pause 1
+do sm 50 6
+pause 1
+do sm 50 6
+pause 1
+do sm 50 6
+pause 1
+do sm 50 7
+pause 1
+do sm 50 7
+pause 1
+do sm 50 7
+pause 1
+do sm 50 7
+pause 1
+do sm 50 7
+pause 1
+do sm 50 @rand(4, 7)
+do talk @npc(49 134)
+pause 5
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(55 134)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(52 136)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(52 136)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 5
+end loop
+goto end
+
+:loopdogat3
+while (class != Thief) as loop
+do relog 5
+pause 5
+do move @rand(59, 62) 133
+pause 5
+do sm 52 @rand(8, 11)
+pause 2
+do sm 52 @rand(8, 11)
+pause 2
+do sm 52 @rand(8, 11)
+do talk @npc(49 134)
+pause 5
+do talk resp 0
+pause 5
+do sm 50 8
+pause 1
+do sm 50 8
+pause 1
+do sm 50 8
+pause 1
+do sm 50 8
+pause 1
+do sm 50 8
+pause 1
+do sm 50 9
+pause 1
+do sm 50 9
+pause 1
+do sm 50 9
+pause 1
+do sm 50 9
+pause 1
+do sm 50 9
+pause 1
+do sm 50 10
+pause 1
+do sm 50 10
+pause 1
+do sm 50 10
+pause 1
+do sm 50 10
+pause 1
+do sm 50 10
+pause 1
+do sm 50 11
+pause 1
+do sm 50 11
+pause 1
+do sm 50 11
+pause 1
+do sm 50 11
+pause 1
+do sm 50 11
+pause 1
+do talk @npc(49 134)
+pause 5
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(55 134)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(52 136)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk @npc(52 136)
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 2
+do talk resp 0
+pause 5
+end loop
+goto end
+
+:end
+
+}
+
+
+automacro Gatuno {
+class Thief
+job == 1
+run-once 1
+overrideAI 1
+exclusive 1
+call virougatuno
+}
+
+macro virougatuno {
+   pause 5
+   do eq Novice Main Gauche [3]
+   pause 5
+   do eq Criatura Academy Hat [1]
+   do conf lockMap payon
+   do conf lockMap_x 181
+   do conf lockMap_y 104
+   release salvapay
+}
+
+automacro salvapay {
+   location payon 178 107 184 101
+   run-once 1
+   disabled 1
+   call salvandopay
+}
+
+macro salvandopay {
+   pause 2
+   do talknpc 181 104 c r0 n
+   pause 5
+   do conf lockMap pay_fild01
+   do conf lockMap_x none
+   do conf lockMap_y none
+   do conf attackAuto 2
+   do conf route_randomWalk 1
+   do conf storageAuto none
+   do conf storageAuto_npc none
+   do conf sellAuto 1
+   do conf sellAuto_npc payon 159 96
+}
+
+automacro vaiesporos {
+   base = 6 .. 27
+   run-once 1
+   call esporo
+}
+
+macro esporo {
+   do conf lockMap pay_fild08
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+   do conf storageAuto none
+   do conf storageAuto_npc none
+   do conf sellAuto 1
+   do conf sellAuto_npc payon 159 96
+   do conf buyflywing.npc payon 159 96
+   do conf buyflywing.minAmount 0
+   do conf buyflywing.maxAmount 40
+   do conf buybutterfly.npc payon 159 96
+   do conf buybutterfly.minAmount 0
+   do conf buybutterfly.maxAmount 5
+   do conf buyredpot.npc payon 159 96
+   do conf buyredpot.minAmount 0
+   do conf buyredpot.maxAmount 150
+   do conf buyconcpot.npc payon 159 96
+   do conf buyconcpot.minAmount 0
+   do conf buyconcpot.maxAmount 10
+}
+
+
+
+automacro vaibigfoot {
+   base = 28 .. 45
+   run-once 1
+   call bigfoot
+}
+
+macro bigfoot {
+   do conf lockMap pay_fild07
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+   do conf storageAuto none
+   do conf storageAuto_npc none
+   do conf sellAuto 1
+   do conf sellAuto_npc payon 159 96
+   do conf buyflywing.npc payon 159 96
+   do conf buyflywing.minAmount 0
+   do conf buyflywing.maxAmount 40
+   do conf buybutterfly.npc payon 159 96
+   do conf buybutterfly.minAmount 0
+   do conf buybutterfly.maxAmount 5
+   do conf buyredpot.npc payon 159 96
+   do conf buyredpot.minAmount 0
+   do conf buyredpot.maxAmount 150
+   do conf buyconcpot.npc payon 159 96
+   do conf buyconcpot.minAmount 0
+   do conf buyconcpot.maxAmount 10
+   pause 2
+   do autosell
+   }
+
+
+automacro vaiwolf {
+   base = 45 .. 70
+   job < 50
+   class Thief
+   run-once 1
+   call wolf
+   }
+
+macro wolf {
+   do conf lockMap moc_fild03
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+   do conf storageAuto none
+   do conf storageAuto_npc none
+   do conf sellAuto 1
+   do conf sellAuto_npc payon_in01 5 49
+   do conf buyflywing.npc payon_in01 5 49
+   do conf buyflywing.minAmount 0
+   do conf buyflywing.maxAmount 40
+   do conf buybutterfly.npc payon_in01 5 49
+   do conf buybutterfly.minAmount 0
+   do conf buybutterfly.maxAmount 5
+   do conf buyredpot.npc payon_in01 5 49
+   do conf buyredpot.minAmount 0
+   do conf buyredpot.maxAmount 150
+   do conf buyconcpot.npc none
+   do conf buyconcpot.minAmount none
+   do conf buyconcpot.maxAmount none
+   do conf buyawakpot.npc payon_in01 5 49
+   do conf buyawakpot.minAmount 0
+   do conf buyawakpot.maxAmount 10
+   do conf teleportAuto_minAggressivesInLock 3
+   do move payon 181 102
+   pause 5
+   do talknpc 181 104 c r0 n
+}
+
+
+automacro vaihode {
+   base = 51 .. 88
+   class Rogue
+   run-once 1
+   overrideAI 1
+   exclusive 1
+   call salvamorroc
+}
+
+macro salvamorroc {
+   pause 3
+   do drop @inventory(Red Potion)
+   pause 1
+   do conf route_avoidWalls 1
+   do conf lockMap morocc
+   do conf lockMap_x 156
+   do conf lockMap_y 97
+   release hodes
+   pause 2
+   do tele 2
+   pause 2
+}
+
+automacro hodes {
+   location morocc 153 100 159 94
+   run-once 1
+   disabled 1
+   call vaihodes
+}
+
+
+macro vaihodes {
+   do talk @npc(156 97)
+   pause 2
+   do talk resp 0
+   pause 2
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+   do conf storageAuto none
+   do conf storageAuto_npc none
+   do conf sellAuto 1
+   do conf sellAuto_npc moc_ruins 91 128
+   do conf buyflywing.npc moc_ruins 91 128
+   do conf buyflywing.minAmount 0
+   do conf buyflywing.maxAmount 40
+   do conf buybutterfly.npc moc_ruins 91 128
+   do conf buybutterfly.minAmount 0
+   do conf buybutterfly.maxAmount 5
+   do conf buyredpot.npc none
+   do conf buyredpot.minAmount none
+   do conf buyredpot.maxAmount none
+   do conf buyorangepot.npc moc_ruins 91 128
+   do conf buyorangepot.minAmount 0
+   do conf buyorangepot.maxAmount 150
+   do conf buyawakpot.npc moc_ruins 91 128
+   do conf buyawakpot.minAmount 0
+   do conf buyawakpot.maxAmount 10
+   pause 5
+   do conf lockMap moc_fild17
+   do conf lockMap_x none
+   do conf lockMap_y none
+   do conf attackEquip_rightHand Gladius [3]
+}
+
+
+automacro vaiporcelio {
+   base = 89 .. 98
+   run-once 1
+   overrideAI 1
+   exclusive 1
+   call salvaein
+}
+
+macro salvaein {
+   pause 3
+   do conf lockMap einbroch
+   do conf lockMap_x 242
+   do conf lockMap_y 205
+   release porcelio
+}
+
+automacro porcelio {
+   location einbroch 239 208 345 202
+   run-once 1
+   disabled 1
+   call {
+   pause 3
+   do talk @npc(242 205)
+   pause 2
+   do talk resp 0
+   pause 2
+   do conf lockMap ein_fild09
+   do conf lockMap_x none
+   do conf lockMap_y none
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+   do conf storageAuto none
+   do conf storageAuto_npc none
+   do conf sellAuto 1
+   do conf sellAuto_npc ein_in01 189 15
+   do conf buyflywing.npc ein_in01 189 15
+   do conf buyflywing.minAmount 0
+   do conf buyflywing.maxAmount 40
+   do conf buybutterfly.npc ein_in01 189 15
+   do conf buybutterfly.minAmount 0
+   do conf buybutterfly.maxAmount 5
+   do conf buyorangepot.npc ein_in01 189 15
+   do conf buyorangepot.minAmount 0
+   do conf buyorangepot.maxAmount 150
+   do conf buyawakpot.npc ein_in01 189 15
+   do conf buyawakpot.minAmount 0
+   do conf buyawakpot.maxAmount 10
+   pause 2
+   }
+}
+
+automacro pegounovenove {
+   base = 99
+   run-once 1
+   overrideAI 1
+   exclusive 1
+   call celebrate
+}
+
+macro celebrate {
+   do conf lockMap aldebaran
+   do conf lockMap_x 150
+   do conf lockMap_y 123
+   release sucesso
+}
+
+automacro sucesso {
+   location aldebaran 147 126 153 120
+   run-once 1
+   disabled 1
+   call {
+   log Peguei 99 Pouraaaaaaa
+   do relog 999999999
+   }
+}
+
+
+
+automacro pegoucinquenta {
+   job = 50
+   class Thief
+   run-once 1
+   exclusive 1
+   inventory "Bear's Footskin" < 10
+   location not cmd_fild01
+   location not cmd_fild02
+   location not cmd_fild03
+   location not cmd_fild04
+   location not cmd_fild05
+   location not cmd_fild06
+   location not cmd_fild07
+   location not cmd_fild08
+   location not cmd_fild09
+   location not rogue_in
+   call pegabear
+}
+
+macro  pegabear {
+   pause 2
+   do conf lockMap pay_fild07
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+   do conf storageAuto none
+   do conf storageAuto_npc none
+   do conf sellAuto 1
+   do conf sellAuto_npc payon_in01 5 49
+   do conf buyflywing.npc payon_in01 5 49
+   do conf buyflywing.minAmount 0
+   do conf buyflywing.maxAmount 40
+   do conf buybutterfly.npc payon_in01 5 49
+   do conf buybutterfly.minAmount 0
+   do conf buybutterfly.maxAmount 5
+   do conf buyredpot.npc payon_in01 5 49
+   do conf buyredpot.minAmount 0
+   do conf buyredpot.maxAmount 150
+   do conf buyconcpot.npc none
+   do conf buyconcpot.minAmount none
+   do conf buyconcpot.maxAmount none
+   do conf buyawakpot.npc payon_in01 5 49
+   do conf buyawakpot.minAmount 0
+   do conf buyawakpot.maxAmount 10
+   pause 2
+   do tele 2
+   pause 5
+   do autosell
+}
+
+automacro pegoubear {
+   class Thief
+   job == 50
+   run-once 1
+   overrideAI 1
+   exclusive 1
+   inventory "Bear's Footskin" > 9
+   inventory "Grasshopper's Leg" < 10
+   location not cmd_fild01
+   location not cmd_fild02
+   location not cmd_fild03
+   location not cmd_fild04
+   location not cmd_fild05
+   location not cmd_fild06
+   location not cmd_fild07
+   location not cmd_fild08
+   location not cmd_fild09
+   location not rogue_in
+   call pegarocker
+}
+
+macro pegarocker {
+   do conf sellAuto none
+   do conf sellAuto_npc none
+   do conf lockMap prt_fild07
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+}
+
+automacro pegourocker {
+   class Thief
+   job == 50
+   run-once 1
+   overrideAI 1
+   exclusive 1
+   inventory "Bear's Footskin" > 9
+   inventory "Grasshopper's Leg" > 9
+   inventory "Yellow Herb" < 10
+   location not cmd_fild01
+   location not cmd_fild02
+   location not cmd_fild03
+   location not cmd_fild04
+   location not cmd_fild05
+   location not cmd_fild06
+   location not cmd_fild07
+   location not cmd_fild08
+   location not cmd_fild09
+   location not rogue_in
+   call pegayellow
+}
+
+macro pegayellow {
+   do conf lockMap moc_fild01
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+   do conf sellAuto none
+   do conf sellAuto_npc none
+}
+
+automacro pegouyellow {
+   class Thief
+   job == 50
+   run-once 1
+   overrideAI 1
+   exclusive 1
+   inventory "Bear's Footskin" > 9
+   inventory "Grasshopper's Leg" > 9
+   inventory "Yellow Herb" > 9
+   inventory "Shell" < 10
+   location not cmd_fild01
+   location not cmd_fild02
+   location not cmd_fild03
+   location not cmd_fild04
+   location not cmd_fild05
+   location not cmd_fild06
+   location not cmd_fild07
+   location not cmd_fild08
+   location not cmd_fild09
+   location not rogue_in
+   call pegashell
+}
+
+macro pegashell {
+   pause 2
+   do tele 2
+   do conf lockMap gef_fild00
+   do conf route_randomWalk 1
+   do conf attackAuto 2
+   do conf sellAuto none
+   do conf sellAuto_npc none
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+}
+
+automacro pegoutudo {
+   class Thief
+   job == 50
+   run-once 1
+   overrideAI 1
+   exclusive 1
+   inventory "Bear's Footskin" > 9
+   inventory "Grasshopper's Leg" > 9
+   inventory "Yellow Herb" > 9
+   inventory "Shell" > 9
+   call 1rogue1
+}
+
+#macro rogue {
+#   do conf route_randomWalk 0
+#   do conf attackAuto 1
+#   do conf storageAuto 0
+#   do conf storageAuto_npc none
+#   do conf sellAuto 0
+#   do conf sellAuto_npc none
+#   do conf buyflywing.disabled 1
+#   do conf buybutterfly.disabled 1
+#   do conf buyorangepot.disabled 1
+#   do conf buyawakpot.disabled 1
+#   pause 2
+#   do conf lockMap_x 136
+#   do conf lockMap_y 134
+#   do conf lockMap cmd_fild07
+#   release 1rogue
+#}
+
+#automacro 1rogue {
+#   job == 50
+#   class Thief
+#   location cmd_fild07 133 137 139 131
+#   run-once 1
+#   disabled 1
+#   call 1rogue1
+#}
+
+macro 1rogue1 {
+   pause 2
+   do tele 2
+   pause 2
+   do conf lockMap_x 368
+   do conf lockMap_y 114
+   do conf lockMap in_rogue
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+   release 2rogue
+   }
+
+
+automacro 2rogue {
+   job == 50
+   class Thief
+   location in_rogue 365 117 371 111
+   run-once 1
+   disabled 1
+   call 2rogue2 
+}
+
+macro 2rogue2 {
+   pause 2
+   do talk @npc(363 122)
+   pause 7
+   release 2rogue2.1
+   release 2rogue2.2
+   release 2rogue2.3
+   do talk resp 0
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+   }
+
+automacro 2rogue2.1 {
+   disabled 1
+   console /By what percentage is the flee rate increased when a Thief masters the Improve Dodge?/
+   run-once 1
+   call {
+   pause 3
+   do talk resp 0
+   pause 3
+   do talk resp 0
+   pause 3
+   do talk resp 2
+   pause 3
+   do talk resp 3
+   pause 3
+   do talk resp 1
+   pause 3
+   do talk resp 3
+   pause 3
+   do talk resp 2
+   pause 3
+   do talk resp 1
+   pause 3
+   do talk resp 0
+   pause 3
+   do talk resp 1
+   pause 5
+   do conf lockMap in_rogue
+   do conf lockMap_x 367
+   do conf lockMap_y 23
+   release 3rogue
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+   }
+}
+
+automacro 2rogue2.2 {
+   disabled 1
+   console /1. Choose the skill necessary for learning Stalk./
+   run-once 1
+   call {
+   pause 3
+   do talk resp 0
+   pause 3
+   do talk resp 2
+   pause 3
+   do talk resp 2
+   pause 3
+   do talk resp 3
+   pause 3
+   do talk resp 3
+   pause 3
+   do talk resp 2
+   pause 3
+   do talk resp 2
+   pause 3
+   do talk resp 2
+   pause 3
+   do talk resp 1
+   pause 3
+   do talk resp 0
+   pause 3
+   do conf lockMap in_rogue
+   do conf lockMap_x 367
+   do conf lockMap_y 23
+   release 3rogue
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+   }
+}
+
+automacro 2rogue2.3 {
+   disabled 1
+   console /1. Which monster drops a slotted Gladius?/
+   call {
+   pause 3
+   do talk resp 3
+   pause 3
+   do talk resp 0
+   pause 3
+   do talk resp 1
+   pause 3
+   do talk resp 3
+   pause 3
+   do talk resp 0
+   pause 3
+   do talk resp 1
+   pause 3
+   do talk resp 3
+   pause 3
+   do talk resp 2
+   pause 3
+   do talk resp 3
+   pause 3
+   do talk resp 2
+   pause 3
+   do conf lockMap in_rogue
+   do conf lockMap_x 367
+   do conf lockMap_y 23
+   release 3rogue
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+   }
+}
+
+macro forcerogue3 {
+   do conf lockMap in_rogue
+   do conf lockMap_x 367
+   do conf lockMap_y 23
+   release 3rogue
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+}
+
+automacro 3rogue {
+   disabled 1
+   location in_rogue 364 26 371 20
+   run-once 1
+   call rogue3
+}
+
+macro rogue3 {
+   do move in_rogue 364 26
+   pause 2
+   do talk @npc(376 23)
+   pause 10
+   do talk @npc(376 23)
+   pause 3
+   do talk @npc(376 23)
+   pause 3
+   do talk @npc(376 23)
+   pause 3
+   do talk @npc(376 23)
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+}
+
+
+automacro 3rogue3.1 {
+   console /The password is Aragham never hoarded upgrade items./
+   run-once 1
+   call rogue3.1
+}
+
+macro rogue3.1 {
+   pause 3
+   do conf lockMap cmd_fild09
+   do conf lockMap_x 106
+   do conf lockMap_y 195
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+   do relog 99999999999
+}
+
+automacro 3rogue3.11 {
+   console /intrude my territory?/
+   location cmd_fild09 100 200 110 190
+   timeout 60
+   call 3rogue3.12
+}
+
+macro 3rogue3.12 {
+   lock pegoucinquenta
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   pause 2
+   do talk resp 1
+   pause 2
+   do talk resp 2
+   pause 2
+   do talk resp 1
+   pause 2
+   do talk resp 0
+   pause 10
+   do move 248 32
+   pause 10
+   do talk 0
+   pause 10
+   do talk resp 0
+   pause 5
+   do conf route_avoidWalls 0
+   do conf route_randomWalk 0
+   do conf attackAuto 0
+   pause 1
+   do move 23 105
+   pause 1
+   do move 23 200
+   pause 1
+   do move 23 293
+   pause 1
+   do move 23 334
+   pause 1
+   do move 61 326
+   pause 1
+   do move 61 310
+   pause 1
+   do move 55 310
+   pause 1
+   do move 55 299
+   pause 1
+   do move 65 241
+   pause 1
+   do move 116 242
+   pause 1
+   do move 178 242
+   pause 1
+   do move 200 237
+   pause 1
+   do move 198 225
+   pause 1
+   do move 153 225
+   pause 1
+   do move 77 195
+   pause 1
+   do move 129 195 
+   pause 1
+   do move 226 195
+   pause 1
+   do move 226 222
+   pause 1
+   do move 241 222
+   pause 1
+   do move 241 313
+   pause 1
+   do move 290 312
+   pause 1
+   do move 369 320
+   pause 5
+   do move 371 118
+   pause 1
+   do talk @npc(363 122)
+   pause 5
+   do eq Gladius [3]
+   pause 3
+   do relog 10
+}
+
+
+automacro 3rogue3.2 {
+   console /Antonio doesn't enjoy destroying upgrade items./
+   overrideAI 1
+   exclusive 1
+   timeout 60
+   call rogue3.2
+}
+
+macro rogue3.2 {
+   do conf lockMap cmd_fild04
+   do conf lockMap_x 304
+   do conf lockMap_y 180
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 1
+   do relog 999999
+}
+
+
+
+automacro 3rogue3.21 {
+   location cmd_fild04 303 181 305 179
+   timeout 60
+   call 3rogue3.22
+}
+
+macro 3rogue3.22 {
+   lock pegoucinquenta
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   do move cmd_fild04 304 180
+   pause 2
+   do talk resp 2
+   pause 2
+   do talk resp 1
+   pause 2
+   do talk resp 1
+   pause 2
+   do talk resp 2
+   pause 10
+   do move 167 107
+   pause 10
+   do talk @npc(177 109)
+   pause 10
+   do talk resp 0
+   pause 5
+   do conf route_avoidWalls 0
+   do conf route_randomWalk 0
+   do conf attackAuto 0
+   pause 2
+   do move 23 105
+   pause 1
+   do move 23 200
+   pause 1
+   do move 23 293
+   pause 1
+   do move 23 334
+   pause 1
+   do move 61 326
+   pause 1
+   do move 61 310
+   pause 1
+   do move 55 310
+   pause 1
+   do move 55 299
+   pause 1
+   do move 65 241
+   pause 1
+   do move 116 242
+   pause 1
+   do move 178 242
+   pause 1
+   do move 200 237
+   pause 1
+   do move 198 225
+   pause 1
+   do move 153 225
+   pause 1
+   do move 77 195
+   pause 1
+   do move 129 195 
+   pause 1
+   do move 226 195
+   pause 1
+   do move 226 222
+   pause 1
+   do move 241 222
+   pause 1
+   do move 241 313
+   pause 1
+   do move 290 312
+   pause 1
+   do move 369 320
+   pause 5
+   do move 371 118
+   pause 1
+   do talk @npc(363 122)
+   pause 5
+   do eq Gladius [3]
+   pause 3
+   do relog 10
+}
+
+
+automacro 3rogue3.3 {
+   console /My father never hoarded upgrade items/
+   timeout 60
+   call rogue3.3
+}
+
+macro rogue3.3 {
+   pause 3
+   do conf lockMap cmd_fild09
+   do conf lockMap_x 335
+   do conf lockMap_y 143
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   lock pegoucinquenta
+   pause 2
+   do relog 9999999999
+}
+
+automacro 3rogue3.31 {
+   console /intrude my territory?/
+   location cmd_fild09 330 148 340 138
+   timeout 60
+   call 3rogue3.32
+}
+
+macro 3rogue3.32 {
+   lock pegoucinquenta
+   lock pegouyellow
+   lock pegourocker
+   lock pegoubear
+   pause 2
+   do talk resp 0
+   pause 2
+   do talk resp 2
+   pause 2
+   do talk resp 4
+   pause 2
+   do talk resp 0
+   pause 10
+   do talk @npc(160 34)
+   pause 10
+   do talk resp 0
+   pause 5
+   do conf route_avoidWalls 0
+   do conf route_randomWalk 0
+   do conf attackAuto 0
+   pause 1
+   do move 23 105
+   pause 1
+   do move 23 200
+   pause 1
+   do move 23 293
+   pause 1
+   do move 23 334
+   pause 1
+   do move 61 326
+   pause 1
+   do move 61 310
+   pause 1
+   do move 55 310
+   pause 1
+   do move 55 299
+   pause 1
+   do move 65 241
+   pause 1
+   do move 116 242
+   pause 1
+   do move 178 242
+   pause 1
+   do move 200 237
+   pause 1
+   do move 198 225
+   pause 1
+   do move 153 225
+   pause 1
+   do move 77 195
+   pause 1
+   do move 129 195 
+   pause 1
+   do move 226 195
+   pause 1
+   do move 226 222
+   pause 1
+   do move 241 222
+   pause 1
+   do move 241 313
+   pause 1
+   do move 290 312
+   pause 1
+   do move 369 320
+   pause 5
+   do move 371 118
+   pause 1
+   do talk @npc(363 122)
+   pause 5
+   do eq Gladius [3]
+   pause 3
+   do relog 10
+}
+
+
+
+automacro pesou {
+   console /(excesso de peso)/
+   timeout 20
+   overrideAI 1
+   exclusive 1
+   call {
+   pause 2
+   do autosell
+   pause 2
+   }
+}
+
+automacro compando {
+   console /Calculating auto-buy/
+   timeout 200
+   overrideAI 1
+   exclusive 1
+   call {
+   pause 1
+   do autosell
+   }
+}
