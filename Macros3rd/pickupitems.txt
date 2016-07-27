@@ -1,0 +1,11 @@
+all 2
+empty bottle 0
+Red Potion 0
+Orange Potion 0
+Yellow Potion 0
+White Potion 0
+Stone 0
+Bill of Birds 0
+Sandals [1] 0
+Wand [2] 0
+Cactus Needle 0
