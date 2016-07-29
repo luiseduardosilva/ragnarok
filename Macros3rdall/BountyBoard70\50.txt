@@ -1,0 +1,174 @@
+#
+# iRO Renewall
+# Macro Bounty Board payon 70/50 - 28/07/2016
+# Quest -> http://irowiki.org/wiki/Bounty_Board_Quests
+# By : LuisSilva
+# Openkore Brazil - www.openkorebrasil.org
+# LuisSilva -> http://openkorebrasil.org/index.php?/user/1587-luissilva/
+#
+
+# Save your char in payon
+automacro startmacro {
+location payon
+base < 6
+run-once 1
+call {
+	pause @rand(1, 2)
+	do talknpc 181 104 c r0 n
+	pause @rand(1, 2)
+	[
+	do conf lockMap pay_fild01
+	do conf lockMap_x none
+	do conf lockMap_y none
+	do conf attackAuto 2
+	do conf route_randomWalk 1
+	do conf storageAuto none
+	do conf storageAuto_npc none
+	do conf sellAuto 1
+	do conf sellAuto_npc payon 159 96
+	# Caso queria, edite a linha abaixo!
+	# If you want, edit the line bellow!
+	#do conf statsAddAuto 1
+	#do conf statsAddAuto_list 10 str, 10 dex, 10 agi, 20 str, 20 dex, 20 agi, 40 str, 40 agi, 30 dex, 60 agi, 50 dex, 50 str, 80 agi, 70 str, 90 agi, 70 dex
+	#do conf statsAddAuto_dontUseBonus 1
+	# Gatuno? Thief?
+	#do conf skillsAddAuto 1
+	#do conf skillsAddAuto_list Basic Skill 9, Double Attack 10, Improve Dodge 10, Steal 10, Hiding 10, Envenom 9, Gank 10, Sword Mastery 10, Mug 2, Divest Helm 5, Divest Shield 3, Slyness 1, Haggle 5
+	call pegaesporo
+	]
+	}
+}
+
+# lvl 6 ~ 27 Spore - pay_fild08
+automacro lvl6ao27 {
+base = 6 .. 27
+run-once 1
+call {
+	do conf lockMap pay_fild08
+	}
+}
+
+# lvl 27~45 Bigfoot - pay_fild07
+automacro lvl28ao45 {
+base = 28 .. 45
+run-once 1
+call {
+	do conf lockMap pay_fild07
+	}
+}
+
+# lvl 46~60 Wolf - moc_fild03
+automacro lvl46ao70 {
+base = 28 .. 45
+run-once 1
+call {
+	do conf lockMap moc_fild03
+	}
+}
+
+# Bigfoot
+automacro talknpcbifoot {
+base = 28 .. 29
+run-once 1
+call pegabig
+}
+
+
+# Wolf
+automacro talknpcwolf {
+base = 50 .. 51
+run-once 1
+call pegalobo
+}
+
+# Quest Spore
+macro pegaesporo {
+do move payon @rand(150, 153) @rand(95, 89)
+do talknpc 148 95 c c r0 c r3 n
+}
+# Quest Bigfoot
+macro pegabig {
+do move payon @rand(150, 153) @rand(95, 89)
+do talknpc 148 93 c c r0 c r4 n
+}
+# Quest Wolf
+macro pegalobo {
+do move payon @rand(150, 153) @rand(95, 89)
+do talknpc 148 91 c c r0 c r5 n
+}
+
+# Automacros - Verificando quests - Checking quests
+
+# Spore
+automacro questesporo {
+timeout 100
+base <= 20
+exclusive 1
+call {
+$temp1 = @eval($::questList->{62565}->{missions}->{1014}->{count})
+	if ($temp1 == 150) call fimesporo
+	}
+}
+
+# Wolf
+automacro questlobo {
+base <= 20
+timeout 100
+exclusive 1
+call {
+$temp1 = @eval($::questList->{62645}->{missions}->{1013}->{count})
+	if ($temp1 == 150) call fimlobo
+	}
+}
+
+# Boa
+automacro questboa {
+base <= 20
+timeout 100
+exclusive 1
+call {
+$temp1 = @eval($::questList->{62566}->{missions}->{1025}->{count})
+	if ($temp1 == 150) call fimboa
+	}
+}
+
+# Bigfoot
+automacro questbig {
+base <= 20
+timeout 100
+exclusive 1
+call {
+$temp1 = @eval($::questList->{62567}->{missions}->{1060}->{count})
+	if ($temp1 == 150) call fimbig
+	}
+}
+
+## Macros - entregar e pegar all
+# Spore
+macro fimesporo {
+do move payon @rand(150, 153) @rand(95, 89)
+do talknpc 148 95 c c r1 c r0 c r1 n
+pause 1
+do talknpc 148 95 c c r0 c r3 n
+}
+# Boa
+macro fimboa {
+do move payon @rand(150, 153) @rand(95, 89)
+do talknpc 148 95 c c r1 c r0 c r2 n
+pause 1
+do talknpc 148 95 c c r0 c r3 n
+}
+# Bigfoot
+macro fimbig {
+do move payon @rand(150, 153) @rand(95, 89)
+do talknpc 148 93 c c r1 c r0 c r0 n
+pause 1
+do talknpc 148 93 c c r0 c r4 n
+}
+# Wolf
+macro fimlobo {
+do move payon @rand(150, 153) @rand(95, 89)
+do talknpc 148 91 c c r1 c r0 c r1 n
+pause 1
+do talknpc 148 91 c c r0 c r5 n
+}
