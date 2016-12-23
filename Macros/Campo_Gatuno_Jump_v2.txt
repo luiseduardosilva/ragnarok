@@ -5,7 +5,7 @@
 # 02/08/15 Fix bug NPC's sala 2
 # 04/01/16 Reformulada - add "QuestPart"
 # 07/01/16 Reformulada
-# 23/12/16 Melhoramente na verificação das quests
+# 23/12/16 Melhoramento na verificação das quests
 ################ EI VOCÊ AI!!! - Leia para não da Merda! <<--
 ## Adicione a sua Config.txt
 #
