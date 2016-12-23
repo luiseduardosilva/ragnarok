@@ -1,0 +1,1165 @@
+################
+# Criada por Luis - http://forums.openkore.com.br/index.php?/user/1242-luisxvi/
+# Macro Campo de Aprendiz, iRO - Classic, Versão 2.0
+# 29/07/15 Criada
+# 02/08/15 Fix bug NPC's sala 2
+# 04/01/16 Reformulada - add "QuestPart"
+# 07/01/16 Reformulada
+# 23/12/16 Melhoramente na verificação das quests
+################ EI VOCÊ AI!!! - Leia para não da Merda! <<--
+## Adicione a sua Config.txt
+#
+#	useSelf_item Novice Potion {
+#		hp < 70%
+#	}
+## Adicione a sua Config.txt
+#	QuestPart
+#	charname
+################ Aviso!
+# Não use Nicks com espaço.
+#	Ex: "mimi mama", "Nome Espaço", "Ola Mundo"
+################ FIM, bom uso da macro! não crie 10000 de bots! salve o mundo =D
+#
+automacro Comecar {
+	location new_1-1, new_2-1, new_3-1, new_4-1, new_5-1
+	exclusive 1
+	run-once 1
+	call passo1
+}
+
+#
+# Configurando o bot
+#
+
+macro passo1 {
+	[
+	####
+#	$charname = @eval ($::char->{'name'}) 
+	do conf charname @eval($::char->{name})
+	####
+	#Pra não da merda
+	do conf lockMap none
+	do conf route_randomWalk 0
+	do conf autoMoveOnDeath 0
+	do conf saveMap none
+	do conf saveMap_warpToBuyOrSell 0
+	do conf sellAuto 0
+	do conf storageAuto 0
+	do conf autoTalkCont 0
+	do conf autoSwitch_default_rightHand none
+	do conf autoSwitch_default_leftHand none
+	do conf autoSwitch_default_arrow none
+	do conf sitAuto_hp_lower 20
+	do conf sitAuto_hp_upper 90
+	do conf sitAuto_idle 0
+	do conf sitAuto_look 4 2
+	do conf sitAuto_look_from_wall 1
+	#Loot
+	do conf itemsTakeAuto 0
+	do conf itemsGatherAuto 0
+	do conf QuestPart novico
+	#Atributos
+	do conf statsAddAuto 1
+	do conf statsAddAuto_list 10 str, 10 agi, 10 dex, 15 str, 40 agi, 20 dex, 40 str, 70 agi, 30 dex, 80 agi, 55 str, 95 agi
+	do conf statsAddAuto_dontUseBonus 1
+	#Habilidades
+	do conf skillsAddAuto 1
+	do conf skillsAddAuto_list Basic Skill 9, Double Attack 10, Improve Dodge 10 
+	]
+}
+
+#
+## Iniciando macro
+#
+
+automacro Move1 {
+	location new_1-1, new_2-1, new_3-1, new_4-1, new_5-1, new_1-2, new_2-2, new_3-2, new_4-2, new_5-2
+	eval $::config{QuestPart} eq "novico"
+	run-once 1
+	call {
+		[
+		log =============================
+		log === Andando para new_1-2 ====
+		log =============================
+		]
+		do move new_1-1 148 112
+		pause 1
+		do conf QuestPart NPC1
+		call passo2
+		}
+}
+automacro NPC1confirme {
+    location new_1-1, new_2-1, new_3-1, new_4-1, new_5-1, new_1-2, new_2-2, new_3-2, new_4-2, new_5-2
+    eval $::config{QuestPart} eq "NPC1"
+    class Novice
+    run-once 1
+    call falandocomnpc1
+}
+
+#
+## Falando com NPC que pede o Nome
+#
+
+macro falandocomnpc1 {
+    pause 3
+    do move @rand(99,101) @rand(24,26)
+[
+    log ================================================
+    log =======  Conversando com Sprakki 2  ============
+    log ================================================
+]
+    pause @rand(1,2)
+
+    do talknpc 100 29  c  t=@eval($::char->{name})  c  c  r0 c  c
+    pause @rand(1,2)
+    do conf QuestPart salaesquerda
+	call
+}
+
+#
+## Indo para sala ao lado
+#
+
+automacro sala {
+    location new_1-1, new_2-1, new_3-1, new_4-1, new_5-1, new_1-2, new_2-2, new_3-2, new_4-2, new_5-2
+	eval $::config{QuestPart} eq "salaesquerda"
+	run-once 1
+	call {
+	[
+	log =================================
+	log == Andando para a sala ao lado ==
+	log =================================
+	]
+	pause 1
+	do move 74 106
+	call movenpc1sala2
+	}
+}
+
+#
+## Se movendo para perto do NPC
+#
+
+macro movenpc1sala2 {
+	[
+	log ============================
+	log == Indo para perto do NPC ==
+	log ============================
+	]
+	pause 1
+	do move new_1-2 @rand (21, 24) @rand (179, 183)
+	call falanpc
+}
+
+#
+## Falando com o NPC da esquerda
+#
+
+macro falanpc {
+	[
+	log ==========================
+	log == Talk NPC da esquerda ==
+	log ==========================
+	]	
+	pause 1
+	do talknpc 17 182 c c c r0 c c c c c c c c c c c c r0 c c c c c c c c c c c r3 n
+	pause 1
+	call movesala2npc2
+}
+
+#
+## Indo para o outro NPC
+#
+
+macro movesala2npc2 {
+	[
+	log ===========================
+	log == Indo para o outro NPC ==
+	log ===========================
+	]
+	pause 1
+	do move @rand (32, 35) @rand (179, 183)
+	call falasala2npc2
+}
+
+#
+## Falando com o NPC
+#
+
+macro falasala2npc2 {
+	do talknpc 38 182 c c c c r0 c c n
+	call campo
+}
+
+#
+## Entrei no Campo - Matar 10 Poring's
+#
+
+automacro campo {
+	location new_1-3, new_2-3, new_3-3
+	run-once 1
+	call {
+		do move @rand (95, 98) @rand (32, 35)
+		#Monstros
+		[
+		do talknpc 95 35 c c
+		do mconf Drops 0 0 0
+		do mconf Lunatic 0 0 0
+		do mconf Pupa 0 0 0
+		do mconf Chonchon 0 0 0
+		do mconf Poring 1 0 1
+		do conf route_randomWalk 1
+		do conf attackAuto 2
+		log =====================================
+		log ===  route_randomWalk 1 Ativado  ==== 
+		log ===  Não Matar Monstros Ativado  ====
+		log =====================================
+		do conf QuestPart Poringg
+		]
+	}
+}
+
+#
+## Pegando Quest poring
+#
+
+automacro TalkNPCCAMPO {
+	eval $::config{QuestPart} eq "Poringg"
+	location new_1-3, new_2-3, new_3-3
+	run-once 1
+	call {
+		[
+		log =====================================
+		log == Pegando Quest Matar 10 Porings ===
+		log =====================================
+		]
+		do talknpc 95 35 c c
+		do conf QuestPart MatandoPoringg
+	}
+}
+
+#
+# Verificando os 10/10 porings, quest campo de aprendiz
+#
+automacro verificaporing {
+	timeout 30
+	eval $::config{QuestPart} eq "MatandoPoringg"
+	location new_1-3, new_2-3, new_3-3
+	exclusive 1
+	call {
+		$temp1 = @eval($::questList->{62141}->{missions}->{1002}->{count})
+			if ($temp1 == 10) call mateios10poringss
+		}
+}
+
+#
+## Matei os 10 porings, talk npc!
+#
+
+macro mateios10poringss {
+	do conf QuestPart mateios10poringss
+}
+automacro mateios10porings {
+	eval $::config{QuestPart} eq "mateios10poringss"
+	run-once 1
+	call {
+		[
+		log ======================
+		log == Matei 10 Porings ==
+		log ======================
+		#Não atacar + os porings
+		do mconf Poring 0 0 0
+		do conf route_randomWalk 0
+		]
+		do move @rand (95, 98) @rand (32, 35)
+		do talknpc 95 35 c c c c
+		do conf QuestPart fim10e10
+		}
+}
+
+automacro base10job10 {
+	eval $::config{QuestPart} eq "fim10e10"
+	job == 10
+	run-once 1
+	call {
+		do move @rand (96, 99) @rand (170, 173)
+		do talknpc 96 174 c r0 c
+		do conf QuestPart talkvalk
+	}
+}
+
+automacro {
+	eval $::config{QuestPart} eq "talkvalk"
+	run-once 1
+	call {
+		do move @rand (98, 102) @rand (15, 18)
+		do talknpc 104 22 c c r0 c r3 c c c
+		do conf QuestPart questgatuno
+	}
+}
+
+#
+# Tô em Asgard, indo falar com o NPC
+#
+
+automacro questgatunov {
+	eval $::config{QuestPart} eq "questgatuno"
+	location asgard_vil
+	run-once 1
+	call {
+		[
+		log ====================================
+		log == To Em Asgard - Go Quest Gatuno ==
+		log ====================================
+		]
+		do move @rand (32, 35) @rand (137, 140)
+		do talknpc 31 140 c c r1 c
+		do conf QuestPart salaquest1
+	}
+}
+
+#
+# Pegando Quest
+#
+
+automacro questgauntotalknpc {
+	eval $::config{QuestPart} eq "salaquest1"
+	location moc_prydb1
+	run-once 1
+	call {
+		[
+		log ==========================
+		log == Pegando Quest Gatuno ==
+		log ==========================
+		]
+		do talknpc 39 129 c r0 c c r0 c c r0 c c c r0 c c c c r0 c
+		#Nao matar poporing
+		do mconf Poporing 0 0 0
+		do conf QuestPart entrarnomapa
+	}
+}
+
+automacro campogatuno {
+	eval $::config{QuestPart} eq "entrarnomapa"
+	run-once 1
+	call {
+		[
+		log ================================
+		log == Indo para NPC campo Gatuno ==
+		log ================================
+		]
+		do move moc_ruins @rand (138, 140) @rand (121, 124)
+		do conf QuestPart falarnpccampogatuno
+	}
+}
+
+automacro talknpccampo {
+	eval $::config{QuestPart} eq "falarnpccampogatuno"
+	location moc_ruins
+	run-once 1
+	call {
+		[
+		log ===========================
+		log == Falando com NPC Campo ==
+		log ===========================
+		]
+		do talknpc 141 125 c c c
+		do conf QuestPart configuracampog
+	}
+}
+
+automacro tonocampodosgatunos {
+	eval $::config{QuestPart} eq "configuracampog"
+	location job_thief1
+	run-once 1
+	call {
+		[
+		do conf route_randomWalk 1
+		#Itens
+		do pconf Orange Net Mushroom 1
+		do pconf Orange Gooey Mushroom 1
+		#All 0
+		do pconf all 0
+		do conf itemsTakeAuto 1
+		do conf itemsGatherAuto 2
+		#ATK
+		do conf attackAuto 2
+		do mconf Mushroom 1 0 1
+		do mconf Spore 0 0 0
+		#
+		do conf QuestPart cogumelo
+		do conf lockMap job_thief1
+		]
+	}
+}
+
+#
+# Verificando cogumelos
+#
+
+automacro gatquest3 {
+	location job_thief1
+	var pegarCogumelos unset 
+    eval $::config{QuestPart} eq "cogumelo"
+    class Novice
+    run-once 1
+    call gatquest3m
+}
+
+macro gatquest3m {
+	pause 1
+	$pegarCogumelos = sim 
+	log === CATANDO COGUMELOS ===
+}
+
+automacro gatunoVerifica { 
+	location job_thief1 
+	class novice 
+	var pegarCogumelos = sim 
+	timeout 60 
+	call quantosCogumelos 
+} 
+
+macro quantosCogumelos { 
+	log == CALCULANDO PONTOS ==
+	$cogumeloVenenoso = @eval (@invamount (Orange Net Mushroom)) 
+	$cogumeloBorrachento = @eval (@invamount (Orange Gooey Mushroom)) 
+	$totalPontos = @eval ($cogumeloVenenoso * 3) 
+	$totalPontos = @eval ($cogumeloBorrachento + $totalPontos) 
+	log $totalPontos pontos foram feitos 
+	if ($totalPontos >= 25) goto terminou 
+	if ($totalPontos < 25) goto aindaNao 
+	goto endofif 
+	:aindaNao 
+	log $totalPontos pontos foram feitos. Quest não terminada. 
+	goto endofif 
+	:terminou 
+	log $totalPontos pontos foram feitos. Quest terminada. 
+	$pegarCogumelos = completo 
+	goto endofif 
+	:endofif 
+}
+
+#
+# Fim campo de gatuno
+#
+
+automacro gatunoTerminou { 
+	location job_thief1 
+	class novice 
+	var pegarCogumelos = completo 
+	run-once 1 
+	call {
+		do conf lockMap none
+		do is Novice Butterfly Wing		
+		do conf route_randomWalk 0
+		do conf QuestPart indogatuno2v
+		call fimgatunohehe
+	} 
+} 
+
+#
+# Em Asgard indo pela 2 vez
+#
+
+automacro questgatunov1 {
+	eval $::config{QuestPart} eq "indogatuno2v"
+	location asgard_vil
+	run-once 1
+	call {
+		[
+		log ======================================
+		log == To Em Asgard - Go Quest Gatuno2v ==
+		log ======================================
+		]
+		do move @rand (32, 35) @rand (137, 140)
+		do talknpc 31 140 c c r1 c
+		do conf QuestPart fimgatuno
+	}
+}
+
+#
+# Virando Gatuno
+#
+
+automacro questgatuno2 {
+	eval $::config{QuestPart} eq "fimgatuno"
+	location moc_prydb1
+	run-once 1
+	call {
+		do talknpc 42 133 c c c c c c c c c c c
+		do conf QuestPart VireigatunoP
+	}
+}
+
+#
+# Sou gatuno?
+#
+
+automacro testandogatuno {
+	eval $::config{QuestPart} eq "VireigatunoP"
+	job = 1 
+	class Thief
+	location moc_prydb1
+	run-once 1
+	call {
+		do talknpc 53 126 c c r0 c
+		do conf QuestPart Jumpp
+	}
+}
+
+###################################
+#		  Start Jump 50/50        #
+###################################
+automacro jump {
+	eval $::config{QuestPart} eq "Jumpp"
+	location asgard_vil
+	class Thief
+	run-once 1
+	call {
+		do move @rand (87, 90) @rand (116, 119)
+		[
+		log ======================
+		log == Pegando Warp prt ==
+		log ======================
+		]
+		do talknpc 88 114 c r3 c
+		do conf QuestPart Jump_a
+	}
+} 
+
+#
+# Pegando 1º Quest 
+#
+
+automacro prt_s {
+	eval $::config{QuestPart} eq "Jump_a"
+	location asgard_vil
+	run-once 1
+	call {
+		do talknpc 90 123 c c
+		do conf QuestPart Jump_b
+	}
+}
+
+#
+# Cheguei na porta dos esgotos
+#
+
+automacro prt_s_s {
+	eval $::config{QuestPart} eq "Jump_b"
+	location prt_fild05
+	run-once 1
+	call {
+		do ai manual
+		do move prt_in @rand (82, 85) @rand (103, 106)
+		do conf QuestPart Jump_c
+		do ai auto
+	}
+}
+
+#
+# Fazendo quest para entrar esgoto
+#
+
+automacro questesgoto {
+	eval $::config{QuestPart} eq "Jump_c"
+	location prt_in
+	run-once 1
+	call {
+		do talknpc 88 105 c r0 c c c c c
+		#Equip's
+		do eq @inventory (Novice Main Gauche [3])
+		do eq @inventory (Novice Adventurer's Suit [1])
+		do conf QuestPart Jump_d
+	}
+}
+
+# Novice Main Gauche [3]
+# Novice Adventurer's Suit [1]
+
+#
+# Configurado para esgoto de prt
+#
+
+automacro configuraesgoto {
+	eval $::config{QuestPart} eq "Jump_d"
+	run-once 1
+	call {
+		[
+		do mconf Thief Bug 1 0 1
+		do mconf Thief Bug Egg 0 0 0
+		do conf route_randomWalk 1
+		do conf attackAuto 2
+		#map
+		do conf lockMap prt_sewb1
+		do conf QuestPart Jump_ave
+		]
+	}
+}
+
+
+#
+# Nova parte Esgoto, verificando
+#
+
+automacro verificaesgoto {
+	timeout 60
+	eval $::config{QuestPart} eq "Jump_ave"
+	location prt_sewb1, prt_sewb1
+	exclusive 1
+	call {
+		$temp1 = @eval($::questList->{62142}->{missions}->{1051}->{count})
+			if ($temp1 == 20) call fimdoesgoto
+		}
+}
+
+#
+# Chamar outra macro para ir Asgard
+#
+
+macro fimdoesgoto {
+	do conf QuestPart fimdoesgoto
+}
+
+automacro terminei_thief_bug {
+	eval $::config{QuestPart} eq "fimdoesgoto"
+	run-once 1
+	call {
+		[
+		log =====================
+		log == Terminei Esgoto ==
+		log =====================
+		]
+		#voltando para prontera
+		do is Prontera Warp Pass
+		#AI manual
+		#do ai manual
+		do conf lockMap none
+		do conf route_randomWalk 0
+		##
+		pause @rand (1, 2)
+		do conf QuestPart prt_jump_a
+	}
+}
+
+#
+# Usando a valk dps de ter usando warp_prt
+#
+
+automacro prt_a {
+	eval $::config{QuestPart} eq "prt_jump_a"
+	location prontera, asgard_vil
+	run-once 1
+	call {
+		do move @rand (117, 123) @rand (81, 75)
+		do talknpc 124 76 c c r0 c
+		do conf QuestPart prt_warp_a
+	}
+}
+
+#
+# Falar com Jump e pegar Warp_prt dnv
+#
+
+automacro prt_a_a {
+	eval $::config{QuestPart} eq "prt_warp_a"
+	location asgard_vil
+	run-once 1
+	call {
+		do move @rand (87, 90) @rand (116, 119)
+		[
+		log ======================
+		log == Pegando Warp prt ==
+		log ======================
+		]
+		do talknpc 88 114 c r3 c
+		do ai auto
+		do conf QuestPart Jump_e
+		call jumpentregaesgoto
+	}
+}
+
+#
+# Entregando QuestEsgoto
+#
+
+automacro jumpentregaesgoto {
+	eval $::config{QuestPart} eq "Jump_e"
+	location asgard_vil
+	run-once 1
+	call {
+		do move @rand (85, 95) @rand (126, 121)
+		do talknpc 90 123 c c
+		do conf QuestPart Jump_f
+	}
+}
+
+#
+# Pegando Quest Zombi
+#
+
+automacro jumpzomb {
+	eval $::config{QuestPart} eq "Jump_f"
+	location asgard_vil
+	base == 20
+	run-once 1
+	call {
+		[
+		log =========================
+		log == Pegando Quest Zumbi ==
+		log =========================
+		]
+		do talknpc 90 123 c c
+		do conf QuestPart Jump_g
+	}
+}
+
+#
+# Configurando pay_dun00
+#
+
+automacro configarche {
+	eval $::config{QuestPart} eq "Jump_g"
+	location pay_arche
+	run-once 1
+	call {
+		[
+		log ============================
+		log == Configurando Pay_dun00 ==
+		log ============================		
+		#conig
+		do conf lockMap pay_dun00
+		do conf route_randomWalk 1
+		#Monstros
+		do mconf Skeleton 0 0 0
+		do mconf Zombie 1 0 1
+		do mconf Poporing 0 0 0
+		do conf QuestPart Jump_h
+		]
+	}
+}
+
+#
+# Terminei Zumbi's
+#
+
+automacro verificafimpaycave {
+	timeout 35
+	eval $::config{QuestPart} eq "Jump_h"
+	location pay_dun00, pay_dun01
+	exclusive 1
+	call {
+		$temp1 = @eval($::questList->{62143}->{missions}->{1015}->{count})
+			if ($temp1 == 30) call fimpaycave
+		}
+}
+
+#
+# Chamar outra macro para ir Asgard
+#
+
+macro fimpaycave {
+	do conf QuestPart fimpaycave
+}
+
+automacro mateioszumbis {
+	eval $::config{QuestPart} eq "fimpaycave"
+	run-once 1
+	call {
+		[
+		log ========================
+		log == Terminei pay_dun00 ==
+		log ========================
+		]
+		do conf lockMap none
+		do conf route_randomWalk 0
+		#voltando para prontera
+		do is Prontera Warp Pass
+		do conf QuestPart prt_jump_a_2
+	}
+}
+
+automacro prt_a_2 {
+	eval $::config{QuestPart} eq "prt_jump_a_2"
+	location prontera
+	run-once 1
+	call {
+		do move @rand (117, 123) @rand (81, 75)
+		do talknpc 124 76 c c r0 c
+		do conf QuestPart prt_warp_a_2
+	}
+}
+
+#
+# Falar com Jump e pegar Warp_prt dnv
+#
+
+automacro prt_a_a_2 {
+	eval $::config{QuestPart} eq "prt_warp_a_2"
+	location asgard_vil
+	run-once 1
+	call {
+		do move @rand (87, 90) @rand (116, 119)
+		[
+		log ======================
+		log == Pegando Warp prt ==
+		log ======================
+		]
+		do talknpc 88 114 c r3 c
+		do ai auto
+		do conf QuestPart Jump_i
+	}
+}
+
+#
+# Entregando Zumbi
+#
+
+automacro jumpentregazumbi {
+	eval $::config{QuestPart} eq "Jump_i"
+	location asgard_vil
+	run-once 1
+	call {
+		do move @rand (85, 95) @rand (126, 121)
+		do talknpc 90 123 c c
+		do conf QuestPart Jump_j
+	}
+}
+
+#
+# Indo Boa 
+#
+
+automacro jumpboa {
+	eval $::config{QuestPart} eq "Jump_j"
+	location asgard_vil
+	run-once 1
+	call {
+		[
+		log =======================
+		log == Pegando Quest Boa ==
+		log =======================
+		]
+		do talknpc 90 123 c c
+		do conf QuestPart Jump_l
+	}
+}
+
+#
+# Configurando pay_fild02
+#
+automacro configarpayfild02 {
+	eval $::config{QuestPart} eq "Jump_l"
+	location pay_fild02
+	run-once 1
+	call {
+		[
+		[
+		log =============================
+		log == Configurando Pay_fild02 ==
+		log =============================
+		]		
+		#conig
+		do conf lockMap pay_fild02
+		do conf route_randomWalk 1
+		#Monstros
+		do mconf Poporing 0 0 0
+		do mconf Boa 1 0 1
+		do mconf Wolf 0 0 0
+		do mconf Spore 0 0 0
+		do conf QuestPart Jump_m
+		]
+	}
+}
+
+#
+# Verificando se terminou boa
+#
+
+automacro verificafimpayboa {
+	timeout 35
+	eval $::config{QuestPart} eq "Jump_m"
+	location pay_fild02
+	exclusive 1
+	call {
+		$temp1 = @eval($::questList->{62144}->{missions}->{1025}->{count})
+			if ($temp1 == 30) call fimpayboa
+		}
+}
+
+#
+# Fim da boa
+#
+
+macro fimpayboa {
+	do conf QuestPart fimpayboa
+}
+
+#
+# Chamar outra macro para ir Asgard
+#
+
+automacro mateiasboas {
+	eval $::config{QuestPart} eq "fimpayboa"
+	run-once 1
+	call {
+		[
+		log ==================
+		log == Terminei Boa ==
+		log ==================
+		]
+		#voltando para prontera
+		do is Prontera Warp Pass
+		#AI manual
+		#do ai manual
+		do conf lockMap none
+		do conf route_randomWalk 0
+		do conf QuestPart prt_jump_a_3
+	}
+}
+
+automacro prt_a_3 {
+	eval $::config{QuestPart} eq "prt_jump_a_3"
+	location prontera
+	run-once 1
+	call {
+		do move @rand (117, 123) @rand (81, 75)
+		do talknpc 124 76 c c r0 c
+		do conf QuestPart prt_warp_a_3
+	}
+}
+
+#
+# Falar com Jump e pegar Warp_prt dnv
+#
+
+automacro prt_a_a_3 {
+	eval $::config{QuestPart} eq "prt_warp_a_3"
+	location asgard_vil
+	run-once 1
+	call {
+		do move @rand (87, 90) @rand (116, 119)
+		[
+		log ======================
+		log == Pegando Warp prt ==
+		log ======================
+		]
+		do talknpc 88 114 c r3 c
+		do ai auto
+		do conf QuestPart Jump_n
+	}
+}
+
+#
+# Entregando Boas
+#
+
+automacro jumpentregaboas {
+	eval $::config{QuestPart} eq "Jump_n"
+	location asgard_vil
+	run-once 1
+	call {
+		do move @rand (90, 95) @rand (126, 124)
+		do talknpc 90 123 c r16 c c c r16 c
+		do talknpc 90 123 c c r1 c c c c c
+		do conf QuestPart Jump_o
+	}
+}
+
+#
+# Pega Thara vai comodo
+#
+
+automacro jumpthara {
+	eval $::config{QuestPart} eq "Jump_o"
+	location asgard_vil
+	base == 40
+	run-once 1
+	call {
+		[
+		log =========================
+		log == Pegando Quest Thara ==
+		log =========================
+		]
+		do talknpc 90 123 c c r1 c c c c c
+		pause @rand (1, 3)
+		do talknpc 90 123 c c c
+		do conf QuestPart sairasgard
+	}
+}
+
+automacro sairasgard {
+	eval $::config{QuestPart} eq "sairasgard"
+	location asgard_vil
+	base == 40
+	run-once 1
+	call {
+		do talknpc 96 129 c r0 c
+		do conf QuestPart irmorroc
+	}
+}
+
+automacro irpramorroc {
+	eval $::config{QuestPart} eq "irmorroc"
+	location prontera
+	run-once 1
+	call {
+		do move @rand (149, 153) @rand (32, 27)
+		do talknpc 151 29 c r2 c r3
+		do conf QuestPart ircomodo
+	}
+}
+
+automacro irparacomodokafra {
+	eval $::config{QuestPart} eq "ircomodo"
+	location morocc
+	run-once 1
+	call {
+		do move @rand (154, 157) @rand (95, 98)
+		do talknpc 156 97 c r2 c r3
+		do conf QuestPart tocomodoemo
+	}
+}
+
+automacro salvacomodo {
+	eval $::config{QuestPart} eq "tocomodoemo"
+	location comodo
+	run-once 1
+	call {
+		do move @rand (193, 198) @rand (147, 151)
+		do talknpc 195 150 c r1 c
+		do conf QuestPart configurathara
+	}
+}
+
+automacro configurathara {
+	eval $::config{QuestPart} eq "configurathara"
+	location comodo
+	run-once 1
+	call {
+		do mconf Thara Frog 1 0 1
+		do mconf Megalodon 0 0 0
+		do conf route_randomWalk 1
+		do conf attackAuto 2
+		#map
+		do conf lockMap beach_dun3
+		do conf QuestPart Jump_p
+	}
+}
+
+
+
+
+#
+# Verificando se terminou tahara
+#
+
+automacro verificafimpathara {
+	timeout 30
+	eval $::config{QuestPart} eq "Jump_p"
+	location beach_dun3
+	exclusive 1
+	call {
+		$temp1 = @eval($::questList->{62145}->{missions}->{1034}->{count})
+			if ($temp1 == 40) call fimdastharas
+		}
+}
+
+#
+# Fim da boa
+#
+
+macro fimdastharas {
+	do conf QuestPart fimdastharas
+}
+
+automacro mateiasthara {
+	eval $::config{QuestPart} eq "fimdastharas"
+	run-once 1
+	call {
+		[
+		log ====================
+		log == Terminei thara ==
+		log ====================
+		]
+		#voltando para prontera
+		do is Prontera Warp Pass
+		#AI manual
+		#do ai manual
+		do conf lockMap none
+		do conf route_randomWalk 0
+		do conf QuestPart prt_jump_a_4
+	}
+}
+
+automacro prt_a_4 {
+	eval $::config{QuestPart} eq "prt_jump_a_4"
+	location prontera
+	run-once 1
+	call {
+		do move @rand (117, 123) @rand (81, 75)
+		do talknpc 124 76 c c r0 c
+		do conf QuestPart prt_warp_a_4
+	}
+}
+
+#
+# Falar com Jump e pegar Warp_prt dnv
+#
+
+automacro prt_a_a_4 {
+	eval $::config{QuestPart} eq "prt_warp_a_4"
+	location asgard_vil
+	run-once 1
+	call {
+		do move @rand (87, 90) @rand (116, 119)
+		[
+		log ======================
+		log == Pegando Warp prt ==
+		log ======================
+		]
+		do talknpc 88 114 c r3 c
+		do ai auto
+		do conf QuestPart lvl
+	}
+}
+
+automacro pegalvlemo {
+	eval $::config{QuestPart} eq "lvl"
+	location asgard_vil
+	run-once 1
+	call {
+		do move @rand (85, 95) @rand (126, 121)
+		do talknpc 90 123 c c
+		do conf QuestPart xota
+	}
+}
+
+automacro xota {
+	eval $::config{QuestPart} eq "xota"
+	location asgard_vil
+	base == 50
+	job == 50
+	#tempo de ele colocar os pontos
+	timeout 60
+	run-once 1
+	call {
+		[
+		log ================ Exit ================
+		log ======================================
+		log == Cabo FDP, + 1 50/50 na sua conta ==
+		log ======================================
+		log == fechando o bot :P =================
+		log ======================================
+		]
+		log ================ 3 ===================
+		pause 1
+		log ================ 2 ===================
+		pause 1
+		log ================ 1 ===================
+		pause 1
+		log ================ Exit ================
+		do quit
+	}
+}
